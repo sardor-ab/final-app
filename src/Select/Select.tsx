@@ -1,10 +1,10 @@
 import React, { createRef, PureComponent } from "react";
 import cn from "classnames";
 import { Input } from "../components/Input";
-import { filterList } from "utils";
+import filterList from "../utils";
 import { AbsolutList } from "./components/list/absolutList";
 import { FixedList } from "./components/list/fixedList";
-import * as css from "./select.module.scss";
+import css from "./select.module.scss";
 
 export interface ISelectItem {
   [key: string]: any;
@@ -28,7 +28,7 @@ interface IProps {
   selectedId?: string | number | boolean;
   items?: ISelectItem[];
   onChange: ISelectChange;
-  onClear?: ISelectClear;
+  onClear: ISelectClear;
 }
 
 interface IState {
@@ -136,6 +136,7 @@ export class Select extends PureComponent<IProps, IState> {
       items,
       onClear,
     } = this.props;
+
     const { isOpen, search } = this.state;
     const selectedValue = items?.find((item) => item.id === selectedId)?.name;
     // eslint-disable-next-line react/destructuring-assignment
@@ -162,14 +163,15 @@ export class Select extends PureComponent<IProps, IState> {
             onChange={this.handleInputChange}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
-            onClear={onClear && this.onClear}
+            onClear={this.onClear}
             helperText={helperText}
           />
           <div
             className={cn(
               css.arrow,
               isOpen && css.arrowOpen,
-              onClear && css.arrowWithClear
+              // onClear && css.arrowWithClear
+              css.arrowWithClear
             )}
           >
             <span>&lsaquo;</span>
