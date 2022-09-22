@@ -28,7 +28,7 @@ interface IProps {
   selectedId?: string | number | boolean;
   items?: ISelectItem[];
   onChange: ISelectChange;
-  onClear: ISelectClear;
+  onClear?: ISelectClear;
 }
 
 interface IState {
@@ -65,14 +65,15 @@ export class Select extends PureComponent<IProps, IState> {
   };
 
   onClear = () => {
-    const { onClear } = this.props;
+    // const { onClear } = this.props;
 
     this.setState(
       {
         isOpen: false,
         search: "",
       },
-      () => onClear(null)
+      // () => onClear(null);
+      () => this.props.onClear?.(null)
     );
   };
 
@@ -165,13 +166,13 @@ export class Select extends PureComponent<IProps, IState> {
             onBlur={this.onBlur}
             onClear={this.onClear}
             helperText={helperText}
+            style={style}
           />
           <div
             className={cn(
               css.arrow,
               isOpen && css.arrowOpen,
-              // onClear && css.arrowWithClear
-              css.arrowWithClear
+              onClear && css.arrowWithClear
             )}
           >
             <span>&lsaquo;</span>

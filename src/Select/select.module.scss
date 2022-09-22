@@ -1,67 +1,68 @@
 .wrapper {
-	width: 100%;
+  width: 100%;
 }
 
 .select {
-	position: relative;
-	width: 100%;
+  position: relative;
+  width: 100%;
 
-	p {
-		bottom: -17px;
-		overflow: hidden;
-		position: absolute;
-		text-overflow: ellipsis;
-		user-select: none;
-		white-space: nowrap;
-		width: 100%;
-	}
+  p {
+    bottom: -17px;
+    overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+    user-select: none;
+    white-space: nowrap;
+    width: 100%;
+  }
 }
 
 .inputWrapper {
-	display: flex;
-	flex-direction: column;
-	position: relative;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .input input {
-	cursor: pointer;
-    padding-left: 10px;
-	padding-right: 24px;
-	text-overflow: ellipsis;
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 24px;
+  text-overflow: ellipsis;
 }
 
 .open input {
-	cursor: auto;
+  cursor: auto;
 }
 
 .arrow {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    bottom: 0;
-    transform: rotate(270deg);
-    transition: transform 300ms ease-in-out;
-    width: 24px;
-    height: 24px;
-    pointer-events: none;
-    user-select: none;
-    border-radius: 50%;
+  position: absolute;
+  right: 10px;
+  // top: 10px;
+  top: 25px;
+  bottom: 0;
+  transform: rotate(270deg);
+  transition: transform 300ms ease-in-out;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  user-select: none;
+  border-radius: 50%;
 
-	span {
-        position: absolute;
-        color: #a0a0a0;
-        font-size: 38px;
-        left: 6px;
-        top: -22px;
-	}
+  span {
+    position: absolute;
+    color: #a0a0a0;
+    font-size: 38px;
+    left: 6px;
+    top: -22px;
+  }
 }
 
 .arrowOpen {
-	cursor: pointer;
-	pointer-events: auto;
-	transform: rotate(90deg);
+  cursor: pointer;
+  pointer-events: auto;
+  transform: rotate(90deg);
 }
 
 .arrowWithClear {
-    right: 30px;
+  right: 30px;
 }

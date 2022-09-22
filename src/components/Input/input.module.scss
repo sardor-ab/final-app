@@ -1,0 +1,39 @@
+div.select_input {
+  padding: 15px 0;
+  position: relative;
+
+  label {
+    position: absolute;
+    top: 0px;
+    left: 12px;
+    font-size: 12px;
+    user-select: none;
+    pointer-events: none;
+    background-color: #ffffff;
+    -webkit-transform: translate(0px, 10px) scale(1);
+    -moz-transform: translate(0px, 10px) scale(1);
+    -ms-transform: translate(0px, 10px) scale(1);
+    transform: translate(0px, 10px) scale(1);
+  }
+
+  input {
+    width: calc(100% - 30px);
+    border: 1px solid #333333;
+    border-radius: 4px;
+    background-color: #ffffff;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    padding: 12px 0 12px 12px;
+    outline: none;
+  }
+
+  span {
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1.66;
+    letter-spacing: 0.03333em;
+    text-align: left;
+    margin: 3px 10px 0px;
+  }
+}
