@@ -1,0 +1,42 @@
+
+.wrapper {
+  animation: dropAnimation 200ms ease-in-out;
+  background: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  box-shadow: 0 0 5px 1px #7d7d7d;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1;
+
+  // @include scrollbars(6px);
+}
+
+.item {
+  border-bottom: 1px solid #dfdfdf;
+  border-radius: 4px 0 4px 0;
+  cursor: pointer;
+  padding: 5px;
+
+  &:hover:not(.selected) {
+    background: #f1f1f1;
+    color: black;
+  }
+}
+
+.active:not(.selected) {
+  background: linear-gradient(45deg, #d9f4ff 80%, transparent);
+  color: black;
+}
+
+.selected {
+  background: linear-gradient(45deg, green 80%, transparent);
+  color: white;
+}
+
+@keyframes dropAnimation {
+
+  from { clip-path: inset(-100% -100% 100% -100%); }
+
+  to { clip-path: inset(0 0 0 0); }
+}

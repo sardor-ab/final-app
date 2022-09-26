@@ -1,7 +1,7 @@
 import React, { createRef, PureComponent } from "react";
 import cn from "classnames";
-import { Input } from "../components/Input";
-import filterList from "../utils";
+import { Input } from "../Input";
+import filterList from "../../utils";
 import { AbsolutList } from "./components/list/absolutList";
 import { FixedList } from "./components/list/fixedList";
 import css from "./select.module.scss";
@@ -144,42 +144,38 @@ export class Select extends PureComponent<IProps, IState> {
     const dataTestId = this.props["data-test-id"] || "select";
 
     return (
-      <div
-        data-test-id={dataTestId}
-        style={style}
-        className={cn(css.wrapper, className)}
-      >
-        <div className={css.select}>
-          <Input
-            data-test-id={`${dataTestId}_input`}
-            label={label}
-            isLoading={isLoading}
-            id={dataTestId}
-            inputRef={this.inputRef}
-            className={cn(css.input, isOpen && css.open)}
-            required={required}
-            disabled={disabled}
-            placeholder={selectedValue || placeholder || ""}
-            value={isOpen ? search : selectedValue}
-            onChange={this.handleInputChange}
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
-            onClear={this.onClear}
-            helperText={helperText}
-            style={style}
-          />
-          <div
-            className={cn(
-              css.arrow,
-              isOpen && css.arrowOpen,
-              onClear && css.arrowWithClear
-            )}
-          >
-            <span>&lsaquo;</span>
+        <div data-test-id={dataTestId} style={style} className={cn(css.wrapper, className)}>
+          <div className={css.select}>
+            <Input
+                data-test-id={`${dataTestId}_input`}
+                label={label}
+                isLoading={isLoading}
+                id={dataTestId}
+                inputRef={this.inputRef}
+                className={cn(css.input, isOpen && css.open)}
+                required={required}
+                disabled={disabled}
+                placeholder={selectedValue || placeholder || ''}
+                value={isOpen ? search : selectedValue}
+                onChange={this.handleInputChange}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+                onClear={onClear && this.onClear}
+                helperText={helperText}
+            />
+            <div
+                role="presentation"
+                onClick={this.onBlur}
+                className={cn(
+                    css.arrow,
+                    isOpen && css.arrowOpen,
+                    onClear && css.arrowWithClear
+                )}>
+              <span>&lsaquo;</span>
+            </div>
+            {isOpen && this.renderList()}
           </div>
-          {isOpen && this.renderList()}
         </div>
-      </div>
     );
   }
 }

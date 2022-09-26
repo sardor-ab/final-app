@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner test snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="observer-spinner"
+    data-test-id="spinner"
+  >
+    <div
+      class="circle"
+    />
+    <div
+      class="circle"
+    />
+    <div
+      class="circle"
+    />
+  </div>
+</DocumentFragment>
+`;
