@@ -4,7 +4,7 @@ import {
   EMPTY_DATA,
   EMPTY_SEARCH,
   LOADING_TEXT,
-} from "../../../constants/index";
+} from "../../../../constants";
 import css from "./list.module.scss";
 
 export interface IListItem {

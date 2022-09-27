@@ -1,35 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import App from "./App";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { Select } from "./Select";
-
-const onChange = () => {
-  console.log("Change");
-};
-
-const onClear = (item: null) => {
-  console.log(item);
-};
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Select
-      label="Input Label"
-      onChange={onChange}
-      onClear={onClear}
-      items={[
-        {
-          id: 0,
-          name: "Sardor",
-        },
-      ]}
-      placeholder="Enter a query"
-      helperText="Enter smth"
-    />
+    <App />
   </React.StrictMode>
 );
 
