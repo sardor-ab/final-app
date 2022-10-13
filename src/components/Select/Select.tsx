@@ -10,8 +10,12 @@ export interface ISelectItem {
   [key: string]: any;
 }
 
-export type ISelectChange = (item: any, name?: string) => void;
-export type ISelectClear = (item: null) => void;
+export type ISelectChange = (
+  item: any,
+  multiple: boolean,
+  name?: string
+) => void;
+export type ISelectClear = (item: null, multiple: boolean) => void;
 
 interface IProps {
   "data-test-id"?: string;
@@ -26,6 +30,7 @@ interface IProps {
   helperText?: string;
   placeholder?: string;
   selectedId?: string | number | boolean;
+  multiple: boolean;
   items?: ISelectItem[];
   onChange: ISelectChange;
   onClear?: ISelectClear;
@@ -65,7 +70,7 @@ export class Select extends PureComponent<IProps, IState> {
   };
 
   onClear = () => {
-    // const { onClear } = this.props;
+    const { onClear, multiple } = this.props;
 
     this.setState(
       {
@@ -73,7 +78,7 @@ export class Select extends PureComponent<IProps, IState> {
         search: "",
       },
       // () => onClear(null);
-      () => this.props.onClear?.(null)
+      () => onClear?.(null, multiple)
     );
   };
 
@@ -84,9 +89,9 @@ export class Select extends PureComponent<IProps, IState> {
   };
 
   handleSelected = (item: ISelectItem) => {
-    const { name, onChange } = this.props;
+    const { name, onChange, multiple } = this.props;
 
-    onChange(item, name);
+    onChange(item, multiple, name);
   };
 
   renderList = () => {
@@ -135,47 +140,58 @@ export class Select extends PureComponent<IProps, IState> {
       required,
       style,
       items,
+      multiple,
       onClear,
     } = this.props;
 
     const { isOpen, search } = this.state;
-    const selectedValue = items?.find((item) => item.id === selectedId)?.name;
+    const selectedValue = multiple
+      ? items
+          ?.filter((item) => selectedId?.toString().includes(item.id))
+          .map((i) => i.name)
+          .join(", ")
+      : items?.find((item) => item.id === selectedId)?.name;
     // eslint-disable-next-line react/destructuring-assignment
     const dataTestId = this.props["data-test-id"] || "select";
 
     return (
-        <div data-test-id={dataTestId} style={style} className={cn(css.wrapper, className)}>
-          <div className={css.select}>
-            <Input
-                data-test-id={`${dataTestId}_input`}
-                label={label}
-                isLoading={isLoading}
-                id={dataTestId}
-                inputRef={this.inputRef}
-                className={cn(css.input, isOpen && css.open)}
-                required={required}
-                disabled={disabled}
-                placeholder={selectedValue || placeholder || ''}
-                value={isOpen ? search : selectedValue}
-                onChange={this.handleInputChange}
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}
-                onClear={onClear && this.onClear}
-                helperText={helperText}
-            />
-            <div
-                role="presentation"
-                onClick={this.onBlur}
-                className={cn(
-                    css.arrow,
-                    isOpen && css.arrowOpen,
-                    onClear && css.arrowWithClear
-                )}>
-              <span>&lsaquo;</span>
-            </div>
-            {isOpen && this.renderList()}
+      <div
+        data-test-id={dataTestId}
+        style={style}
+        className={cn(css.wrapper, className)}
+      >
+        <div className={css.select}>
+          <Input
+            data-test-id={`${dataTestId}_input`}
+            label={label}
+            isLoading={isLoading}
+            id={dataTestId}
+            inputRef={this.inputRef}
+            className={cn(css.input, isOpen && css.open)}
+            required={required}
+            disabled={disabled}
+            placeholder={selectedValue || placeholder || ""}
+            value={isOpen ? search : selectedValue}
+            onChange={this.handleInputChange}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+            onClear={onClear && this.onClear}
+            helperText={helperText}
+          />
+          <div
+            role="presentation"
+            onClick={this.onBlur}
+            className={cn(
+              css.arrow,
+              isOpen && css.arrowOpen,
+              onClear && css.arrowWithClear
+            )}
+          >
+            <span>&lsaquo;</span>
           </div>
+          {isOpen && this.renderList()}
         </div>
+      </div>
     );
   }
 }
